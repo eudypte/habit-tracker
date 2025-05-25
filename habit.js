@@ -23,13 +23,35 @@ const BG_IMAGE_URL = "imgur.com/meow";
 
 // STEP 4: Customize the appearance (optional)
 // Background overlay color and opacity
-const BG_COLOR = "#406260";       // Overlay color in hex format
-const BG_OVERLAY_OPACITY = 0.5;   // Overlay opacity (0-1)
 
-// Color settings for dots
-const COLOR_FILLED = new Color("#ffffff");         // Color for completed days
-const COLOR_UNFILLED = new Color("#ffffff", 0.4);  // Color for remaining days
+const theme = "gruv";
+var BG_COLOR = "#406260";       // Overlay color in hex format
+const BG_OVERLAY_OPACITY = 0.5;   // Overlay opacity (0-1)
+var COLOR_FILLED = new Color("#ffffff");         // Color for completed days
+var COLOR_UNFILLED = new Color("#ffffff", 0.4);  // Color for remaining days
+var TEXT_COLOR = new Color("#ffffff")
 const red = new Color("#FF0000");
+
+switch(theme){
+  case "midnight":
+    BG_COLOR = "#406260";
+    COLOR_FILLED = new Color("#ffffff");
+    COLOR_UNFILLED = new Color("#ffffff", 0.4);
+    break;
+  case "gruv":
+    BG_COLOR = "#4B352A";
+    COLOR_FILLED = new Color("#B2CD9C");
+    COLOR_UNFILLED = new Color("#F0F2BD", 0.4);
+    TEXT_COLOR = new Color("#ffffff", 0.8);
+    break;
+  case "dark":
+    BG_COLOR = "#222831";
+    COLOR_FILLED = new Color("#DFD0B8");
+    COLOR_UNFILLED = new Color("#948979", 0.4);
+    TEXT_COLOR = new Color("#ffffff", 0.8);
+    break;
+    
+}
 
 // STEP 5: Layout settings
 // These are optimized for iPhone 15 Pro. You may need to adjust for different devices.
@@ -77,7 +99,7 @@ if (fileManager.fileExists(dataPath)) {
   
   let dataContent = fileManager.readString(dataPath)
   dataContent = JSON.parse(dataContent)
-  habitData = dataContent["gym"] || {}
+  habitData = dataContent[EVENT_NAME] || {}
 }
 
 function formatDate(d) {
@@ -176,7 +198,7 @@ const eventStack = footer.addStack();
 eventStack.addSpacer(YEAR_OFFSET);
 const eventText = eventStack.addText(EVENT_NAME);
 eventText.font = MENLO_BOLD;
-eventText.textColor = COLOR_FILLED;
+eventText.textColor = TEXT_COLOR;
 
 if (counter == 1) counter = 0;
 const daysText = `${counter} day streak`;
@@ -190,7 +212,7 @@ footer.addSpacer(spacerLength);
 const daysTextStack = footer.addStack();
 const daysLeft = daysTextStack.addText(daysText);
 daysLeft.font = MENLO_REGULAR;
-daysLeft.textColor = COLOR_UNFILLED;
+daysLeft.textColor = TEXT_COLOR;
 
 if (config.runsInWidget) {
   Script.setWidget(widget);
@@ -198,4 +220,3 @@ if (config.runsInWidget) {
   widget.presentMedium();
 }
 Script.complete();
-
