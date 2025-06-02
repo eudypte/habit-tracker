@@ -13,8 +13,8 @@ const EVENT_NAME = "gym";
 // STEP 2: Set your start and end dates (Format: YYYY, MM-1, DD)
 // IMPORTANT: Months are 0-indexed, meaning January=0, February=1, etc.
 // Example: December 25, 2024 would be (2024, 11, 25)
-const START_DATE = new Date(2025, 4, 10);  // September 26, 2024
-const END_DATE = new Date(2025, 11, 10);    // July 15, 2025
+const START_DATE = new Date(2025, 4, 10);  // May 10, 2025
+const END_DATE = new Date(2025, 11, 10);    // December 10, 2025
 
 // STEP 3: Add your background image URL
 // Replace with your own image URL or leave blank for no image
@@ -22,7 +22,7 @@ const END_DATE = new Date(2025, 11, 10);    // July 15, 2025
 const BG_IMAGE_URL = "imgur.com/meow";
 
 // STEP 4: Customize the appearance (optional)
-// Background overlay color and opacity
+// Choose a theme (or make your own)
 
 const theme = "gruv";
 var BG_COLOR = "#406260";       // Overlay color in hex format
@@ -30,7 +30,7 @@ const BG_OVERLAY_OPACITY = 0.5;   // Overlay opacity (0-1)
 var COLOR_FILLED = new Color("#ffffff");         // Color for completed days
 var COLOR_UNFILLED = new Color("#ffffff", 0.4);  // Color for remaining days
 var TEXT_COLOR = new Color("#ffffff")
-const red = new Color("#FF0000");
+var EVENT_COLOR = new Color("#FF0000");
 
 switch(theme){
   case "midnight":
@@ -175,7 +175,7 @@ for (let row = 0; row < ROWS; row++) {
     
     if(day<=DAYS_SINCE_START){
       if(habitToday=="true"){
-      circle.textColor = red
+      circle.textColor = EVENT_COLOR;
         if(lastDay){
           counter++;
       }
